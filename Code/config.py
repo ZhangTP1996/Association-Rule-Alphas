@@ -1,10 +1,9 @@
 
 
-config = {'path_data':'./TrainDataZZ15',
-          'split_point_save_path': './EquiDepth_pct5.json',
-          'dataset_path': './data/EquiDepth_Label000_pct5.csv',
+config = {'path_data':'./TrainData',     # path for training data
+          'split_point_save_path': './EquiDepth_pct5.json',  # path for saving split points
           'depth': 0.1,
-          'split_num': 9,   # EquiDepth的分割点
-          'minsup_categorical': 0.1,    # 给categorical用的
+          'split_num': 9,
+          'minsup_categorical': 0.1,
           'minsup_quantitative': 0.05
           }

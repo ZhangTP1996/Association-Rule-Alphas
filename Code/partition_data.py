@@ -122,6 +122,8 @@ def get_binary(data):
     split_point_list = {}
     for key in data.keys():
         print("Processing feature %s." % key)
+        if key == 'label':
+            continue
         key_type = get_type(data[key])
         print("Processing feature %s. It's type %d" % (key, key_type))
         if key_type == 0:
@@ -139,12 +141,10 @@ def get_binary(data):
     return result
 
 if __name__ == '__main__':
-    path = '/home/user/AssociationRule_1/2018-12-02/TrainDataZZ15'
-    data = load_daily_data_simple(path)
-    label = load_daily_data_simple('/home/user/AssociationRule_1/2018-12-02/data', ['label'])
-    label['label'] = label['label'].loc[label['label'].index <= '20171231']
+    data = load_daily_data_simple(config['path_data'])
+    label = data['label'].loc[data['label'].index <= '20171231']
     for key in data.keys():
-        data[key] = data[key].loc[label['label'].index]
-    data['label'] = label['label']
+        data[key] = data[key].reindex(label.index)
+    data['label'] = label
     result = get_binary(data)
     print(len(result.keys()))
